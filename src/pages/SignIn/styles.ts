@@ -6,7 +6,6 @@ import signInBackground from '../../assets/sign-in-background.png';
 export const Container = styled.div`
   height: 100vh;
   display: flex;
-  align-items: stretch;
 `;
 
 export const Content = styled.div`
@@ -24,21 +23,6 @@ export const Content = styled.div`
 
     h1 {
       margin-bottom: 2.4rem;
-    }
-
-    input {
-      background: #232129;
-      border-radius: 10px;
-      border: 2px solid #232129;
-      padding: 1.6rem;
-      width: 100%;
-      color: #f4ede8;
-      &::placeholder {
-        color: #666360;
-      }
-      & + input {
-        margin-top: 0.8rem;
-      }
     }
 
     button {
