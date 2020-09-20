@@ -8,8 +8,11 @@ export default createGlobalStyle`
     outline: 0;
   }
 
-  body {
+  html {
     font-size: 62.5%; /** 10px; */
+  }
+
+  body {
     color: #fff;
     background: #312E38;
     -webkit-font-smoothing: antialiased;
