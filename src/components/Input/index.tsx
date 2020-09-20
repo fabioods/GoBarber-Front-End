@@ -1,11 +1,4 @@
-import React, {
-  ComponentType,
-  InputHTMLAttributes,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { ComponentType, InputHTMLAttributes, useCallback, useEffect, useRef, useState } from 'react';
 import { IconBaseProps } from 'react-icons';
 import { useField } from '@unform/core';
 import { Container } from './styles';
@@ -41,13 +34,7 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   return (
     <Container isFilled={isFilled} isFocused={isFocused}>
       {Icon && <Icon size={16} />}
-      <input
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        defaultValue={defaultValue}
-        ref={inputRef}
-        {...rest}
-      />
+      <input onFocus={handleInputFocus} onBlur={handleInputBlur} defaultValue={defaultValue} ref={inputRef} {...rest} />
     </Container>
   );
 };
