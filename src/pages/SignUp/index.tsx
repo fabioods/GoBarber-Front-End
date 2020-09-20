@@ -9,10 +9,16 @@ import Button from '../../components/Button';
 import Input from '../../components/Input';
 import getValidationErros from '../../utils/getValidationErrors';
 
+interface FormProps {
+  name: string;
+  email: string;
+  password: string;
+}
+
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const handleOnSubmit = useCallback(async (data: object) => {
+  const handleOnSubmit = useCallback(async (data: FormProps) => {
     try {
       formRef.current?.setErrors({});
       const schema = Yup.object().shape({
@@ -20,7 +26,6 @@ const SignUp: React.FC = () => {
         email: Yup.string().required('Digite um e-mail.').email('Digite um e-mail válido.'),
         password: Yup.string().min(6, 'No mínimo 6 dígitos.'),
       });
-      console.table(data);
       await schema.validate(data, { abortEarly: false });
     } catch (error) {
       const errors = getValidationErros(error);
