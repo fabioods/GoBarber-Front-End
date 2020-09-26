@@ -10,7 +10,8 @@ import Logo from '../../assets/logo.svg';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import getValidationErros from '../../utils/getValidationErrors';
-import { useAuth } from '../../hooks/AuthContext';
+import { useAuth } from '../../hooks/Auth';
+import { useToast } from '../../hooks/Toast';
 
 interface FormProps {
   email: string;
@@ -20,6 +21,7 @@ interface FormProps {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const authContext = useAuth();
+  const { addToast } = useToast();
 
   const handleOnSubmit = useCallback(
     async (data: FormProps) => {
@@ -30,15 +32,16 @@ const SignIn: React.FC = () => {
           password: Yup.string().required('Digite sua senha'),
         });
         await schema.validate(data, { abortEarly: false });
-        authContext.signIn({ email: data.email, password: data.password });
+        await authContext.signIn({ email: data.email, password: data.password });
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErros(error);
           formRef.current?.setErrors(errors);
         }
+        addToast();
       }
     },
-    [authContext],
+    [authContext, addToast],
   );
 
   return (
