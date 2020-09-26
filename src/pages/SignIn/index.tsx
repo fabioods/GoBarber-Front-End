@@ -5,7 +5,8 @@ import { Form } from '@unform/web';
 
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import { Container, Background, Content } from './styles';
+import { Link } from 'react-router-dom';
+import { Container, Background, Content, AnimationContainer } from './styles';
 import Logo from '../../assets/logo.svg';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
@@ -37,6 +38,7 @@ const SignIn: React.FC = () => {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErros(error);
           formRef.current?.setErrors(errors);
+          return;
         }
         addToast({
           title: 'Erro na autenticação',
@@ -51,19 +53,21 @@ const SignIn: React.FC = () => {
   return (
     <Container>
       <Content>
-        <img src={Logo} alt="GoBarber" />
-        <Form onSubmit={handleOnSubmit} ref={formRef}>
-          <h1>Faça seu logon</h1>
-          <Input name="email" type="email" icon={FiMail} placeholder="E-mail" />
-          <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
-          <Button type="submit">Entrar</Button>
+        <AnimationContainer>
+          <img src={Logo} alt="GoBarber" />
+          <Form onSubmit={handleOnSubmit} ref={formRef}>
+            <h1>Faça seu logon</h1>
+            <Input name="email" type="email" icon={FiMail} placeholder="E-mail" />
+            <Input name="password" icon={FiLock} type="password" placeholder="Senha" />
+            <Button type="submit">Entrar</Button>
 
-          <a href="forgot">Esqueci minha senha</a>
-        </Form>
-        <a href="create">
-          <FiLogIn />
-          Criar conta
-        </a>
+            <a href="forgot">Esqueci minha senha</a>
+          </Form>
+          <Link to="/signup">
+            <FiLogIn />
+            Criar conta
+          </Link>
+        </AnimationContainer>
       </Content>
       <Background />
     </Container>
