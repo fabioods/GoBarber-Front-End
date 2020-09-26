@@ -1,11 +1,9 @@
 import React, { useCallback, useRef } from 'react';
-
 import { FiLogIn, FiLock, FiMail } from 'react-icons/fi';
 import { Form } from '@unform/web';
-
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Container, Background, Content, AnimationContainer } from './styles';
 import Logo from '../../assets/logo.svg';
 import Button from '../../components/Button';
@@ -23,6 +21,7 @@ const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const authContext = useAuth();
   const { addToast } = useToast();
+  const history = useHistory();
 
   const handleOnSubmit = useCallback(
     async (data: FormProps) => {
@@ -34,6 +33,7 @@ const SignIn: React.FC = () => {
         });
         await schema.validate(data, { abortEarly: false });
         await authContext.signIn({ email: data.email, password: data.password });
+        history.push('/dashboard');
       } catch (error) {
         if (error instanceof Yup.ValidationError) {
           const errors = getValidationErros(error);
@@ -47,7 +47,7 @@ const SignIn: React.FC = () => {
         });
       }
     },
-    [authContext, addToast],
+    [authContext, addToast, history],
   );
 
   return (
