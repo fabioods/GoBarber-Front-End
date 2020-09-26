@@ -10,7 +10,7 @@ import Logo from '../../assets/logo.svg';
 import Button from '../../components/Button';
 import Input from '../../components/Input';
 import getValidationErros from '../../utils/getValidationErrors';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 
 interface FormProps {
   email: string;
@@ -20,7 +20,6 @@ interface FormProps {
 const SignIn: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const authContext = useAuth();
-  console.log(authContext.user);
 
   const handleOnSubmit = useCallback(
     async (data: FormProps) => {

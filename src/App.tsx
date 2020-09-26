@@ -1,7 +1,7 @@
 import React from 'react';
 import GlobalStyle from './styles/global';
 import SignIn from './pages/SignIn';
-import { AuthContextProvider } from './context/AuthContext';
+import { AuthContextProvider } from './hooks/AuthContext';
 
 const App: React.FC = () => {
   return (

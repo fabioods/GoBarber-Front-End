@@ -4,6 +4,7 @@ import api from '../services/api';
 
 interface AuthContextData {
   signIn(data: AuthSignInData): Promise<void>;
+  signOut(): void;
   user: object;
 }
 
@@ -38,7 +39,13 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, []);
 
-  return <AuthContext.Provider value={{ signIn, user: data.user }}>{children}</AuthContext.Provider>;
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@GoBarber-token');
+    localStorage.removeItem('@GoBarber-user');
+    setData({} as AuthState);
+  }, []);
+
+  return <AuthContext.Provider value={{ signIn, signOut, user: data.user }}>{children}</AuthContext.Provider>;
 };
 
 export function useAuth(): AuthContextData {
