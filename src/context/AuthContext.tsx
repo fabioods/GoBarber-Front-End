@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import React, { createContext, useCallback, useState } from 'react';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 import api from '../services/api';
 
 interface AuthContextData {
   signIn(data: AuthSignInData): Promise<void>;
-  data: AuthState;
+  user: object;
 }
 
 interface AuthSignInData {
@@ -38,7 +38,17 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, []);
 
-  return <AuthContext.Provider value={{ signIn, data }}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ signIn, user: data.user }}>{children}</AuthContext.Provider>;
 };
+
+export function useAuth(): AuthContextData {
+  const context = useContext<AuthContextData>(AuthContext);
+
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+
+  return context;
+}
 
 export const AuthContext = createContext({} as AuthContextData);
