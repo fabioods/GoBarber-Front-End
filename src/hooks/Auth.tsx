@@ -2,10 +2,16 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import api from '../services/api';
 
+interface User {
+  id: string;
+  avatar_url: string;
+  name: string;
+}
+
 interface AuthContextData {
   signIn(data: AuthSignInData): Promise<void>;
   signOut(): void;
-  user: object;
+  user: User;
 }
 
 interface AuthSignInData {
@@ -15,7 +21,7 @@ interface AuthSignInData {
 
 interface AuthState {
   token: string;
-  user: object;
+  user: User;
 }
 
 export const AuthProvider: React.FC = ({ children }) => {
