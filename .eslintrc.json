@@ -37,7 +37,8 @@
     "prettier/prettier": "error",
     "react/jsx-one-expression-per-line": ["error", { "allow": "single-child" }],
     "no-use-before-define": "off",
-    "camelcase": "off"
+    "camelcase": "off",
+    "import/no-duplicates": "off"
   },
   "settings": {
     "import/resolver": {
