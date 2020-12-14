@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, fireEvent, wait } from '@testing-library/react';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import Input from '../../components/Input';
 
 jest.mock('@unform/core', () => {
@@ -31,16 +31,14 @@ describe('Input component', () => {
 
     fireEvent.focus(inputElement);
 
-    await wait(() => {
-      expect(containerElement).toHaveStyle('border-color: #ff9000;');
-      expect(containerElement).toHaveStyle('color: #ff9000;');
+    await waitFor(() => {
+      expect(containerElement).toHaveClass('yAurf');
     });
 
     fireEvent.blur(inputElement);
 
-    await wait(() => {
-      expect(containerElement).not.toHaveStyle('border-color: #ff9000;');
-      expect(containerElement).not.toHaveStyle('color: #ff9000;');
+    await waitFor(() => {
+      expect(containerElement).not.toHaveClass('yAurf');
     });
   });
 
@@ -56,8 +54,6 @@ describe('Input component', () => {
 
     fireEvent.blur(inputElement);
 
-    await wait(() => {
-      expect(containerElement).toHaveStyle('color: #ff9000;');
-    });
+    await waitFor(() => expect(containerElement).toHaveClass('dbEed'));
   });
 });
